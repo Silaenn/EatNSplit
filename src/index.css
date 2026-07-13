@@ -460,7 +460,7 @@ body::before {
   }
 
   .piano-keys {
-    height: clamp(9rem, 24vh, 14rem);
+    height: clamp(14rem, 35vh, 22rem);
   }
 
   .key {
