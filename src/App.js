@@ -77,8 +77,8 @@ export default function App() {
     return audioCtx.current;
   }
 
-  const startNote = useCallback((noteIndex) => {
-    if (isPlayingRef.current) return;
+  const startNote = useCallback((noteIndex, force = false) => {
+    if (!force && isPlayingRef.current) return;
     if (oscillators.current[noteIndex]) return;
 
     const ctx = getContext();
@@ -97,7 +97,6 @@ export default function App() {
     const now = ctx.currentTime;
     gain.gain.setValueAtTime(0, now);
     gain.gain.linearRampToValueAtTime(0.3, now + 0.005);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 2);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
@@ -125,8 +124,8 @@ export default function App() {
       try {
         const now = ctx.currentTime;
         gain.gain.cancelScheduledValues(now);
-        gain.gain.setValueAtTime(Math.min(gain.gain.value || 0.3, 0.3), now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
       } catch {}
     }
 
@@ -241,7 +240,7 @@ export default function App() {
 
     const timers = recordedData.map(({ noteIndex, time }) =>
       setTimeout(() => {
-        startNote(noteIndex);
+        startNote(noteIndex, true);
         setTimeout(() => stopNote(noteIndex), 350);
       }, time)
     );
