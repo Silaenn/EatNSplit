@@ -23,7 +23,7 @@ export default function Controls({
         <button
           className="ctrl-btn play"
           onClick={onPlay}
-          disabled={isPlaying || recordedCount === 0}
+          disabled={isPlaying || recordedCount === 0 || isRecording}
         >
           Play
         </button>
@@ -31,7 +31,7 @@ export default function Controls({
         <button
           className="ctrl-btn stop"
           onClick={onStop}
-          disabled={!isPlaying && !isRecording}
+          disabled={!isPlaying || isRecording}
         >
           Stop
         </button>
@@ -39,7 +39,7 @@ export default function Controls({
         <button
           className="ctrl-btn clear"
           onClick={onClear}
-          disabled={recordedCount === 0 && !isRecording}
+          disabled={(recordedCount === 0 && !isRecording) || isRecording}
         >
           Clear
         </button>

@@ -13,7 +13,6 @@ const AUDIO = {
 };
 
 const RECORDING_INTERVAL_MS = 100;
-const PLAYBACK_NOTE_DURATION_MS = 350;
 const PLAYBACK_BUFFER_MS = 150;
 
 export function usePiano() {
@@ -75,7 +74,7 @@ export function usePiano() {
     if (isRecordingRef.current) {
       setRecordedNotes((prev) => [
         ...prev,
-        { noteIndex, time: Date.now() - recordingStartedAt.current },
+        { type: "on", noteIndex, time: Date.now() - recordingStartedAt.current },
       ]);
     }
   }, []);
@@ -104,6 +103,13 @@ export function usePiano() {
       next.delete(noteId);
       return next;
     });
+
+    if (isRecordingRef.current) {
+      setRecordedNotes((prev) => [
+        ...prev,
+        { type: "off", noteIndex, time: Date.now() - recordingStartedAt.current },
+      ]);
+    }
   }, []);
 
   const silenceAll = useCallback(() => {
@@ -207,19 +213,19 @@ export function usePiano() {
   }, []);
 
   const handlePlay = useCallback(() => {
-    const notes = recordedRef.current;
-    if (notes.length === 0 || isPlayingRef.current) return;
+    const events = recordedRef.current;
+    if (events.length === 0 || isPlayingRef.current) return;
 
     setIsPlaying(true);
 
-    playbackTimers.current = notes.map(({ noteIndex, time }) =>
+    playbackTimers.current = events.map(({ type, noteIndex, time }) =>
       setTimeout(() => {
-        noteOn(noteIndex, true);
-        setTimeout(() => noteOff(noteIndex), PLAYBACK_NOTE_DURATION_MS);
+        if (type === "on") noteOn(noteIndex, true);
+        else noteOff(noteIndex);
       }, time)
     );
 
-    const lastEnd = (notes.at(-1)?.time ?? 0) + PLAYBACK_NOTE_DURATION_MS + PLAYBACK_BUFFER_MS;
+    const lastEnd = (events.at(-1)?.time ?? 0) + PLAYBACK_BUFFER_MS;
     setTimeout(() => setIsPlaying(false), lastEnd);
   }, [noteOn, noteOff]);
 
