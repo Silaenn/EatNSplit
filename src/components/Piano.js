@@ -1,5 +1,7 @@
-const WHITE_KEY_COUNT = 7;
+import { getNoteId } from "../constants/notes";
+
 const BLACK_KEY_POSITIONS = [0, 1, 3, 4, 5];
+const EXTRA_KEY_INDEX = 12;
 
 export default function Piano({
   noteData,
@@ -12,13 +14,17 @@ export default function Piano({
   onNoteEnd,
   onNoteHover,
 }) {
+  const whiteKeyCount = whiteKeyIndices.length;
+  const blackWidthRatio = 4.5;
+
   return (
     <div className="piano-wrapper">
       <div className="piano">
         <div className="piano-keys">
           {whiteKeyIndices.map((idx) => {
-            const note = noteData[idx];
-            const noteId = `${note.name}${octave}`;
+            const isExtraKey = idx === EXTRA_KEY_INDEX;
+            const note = isExtraKey ? { name: "C" } : noteData[idx];
+            const noteId = getNoteId(idx, octave);
             const isActive = activeNoteIds.has(noteId);
 
             return (
@@ -37,10 +43,10 @@ export default function Piano({
 
           {blackKeyIndices.map((idx, i) => {
             const note = noteData[idx];
-            const noteId = `${note.name}${octave}`;
+            const noteId = getNoteId(idx, octave);
             const isActive = activeNoteIds.has(noteId);
             const pos = BLACK_KEY_POSITIONS[i];
-            const left = ((pos + 1) / WHITE_KEY_COUNT) * 100 - 4.5;
+            const left = ((pos + 1) / whiteKeyCount) * 100 - blackWidthRatio;
 
             return (
               <div

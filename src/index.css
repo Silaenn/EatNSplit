@@ -12,6 +12,7 @@ html {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   background: #1a1a2e;
   color: #e0e0e0;
   display: flex;
@@ -26,32 +27,35 @@ body {
 }
 
 .app {
-  width: 70rem;
-  max-width: 95vw;
+  width: 100%;
+  max-width: 70rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 3rem 2rem;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(1.5rem, 3vw, 3rem);
 }
 
 .app-title {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 600;
   color: #fff;
   letter-spacing: 1px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* Status Bar */
 .status-bar {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
   background: #16213e;
   border-radius: 1rem;
-  padding: 1.2rem 2rem;
-  font-size: 1.3rem;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1rem, 2vw, 2rem);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
 }
 
 .status-item {
@@ -59,11 +63,12 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
+  min-width: 7rem;
 }
 
 .status-label {
   color: #888;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -75,9 +80,9 @@ body {
 
 .note-display {
   font-family: "Courier New", monospace;
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: #4fc3f7;
-  min-width: 10rem;
+  min-width: 8rem;
   text-align: center;
 }
 
@@ -110,15 +115,17 @@ body {
 .piano {
   background: #0d0d1a;
   border-radius: 1.2rem;
-  padding: 2rem 2rem 1.5rem;
+  padding: clamp(1rem, 2.5vw, 2rem) clamp(1rem, 2.5vw, 2rem) clamp(0.8rem, 2vw, 1.5rem);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  width: 100%;
+  overflow: hidden;
 }
 
 .piano-keys {
   position: relative;
   display: flex;
-  height: 22rem;
+  height: clamp(14rem, 30vw, 22rem);
 }
 
 .key {
@@ -127,13 +134,13 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 1rem;
+  padding-bottom: clamp(0.5rem, 1vw, 1rem);
   user-select: none;
-  transition: background 0.05s, transform 0.05s;
+  transition: background 0.05s;
 }
 
 .key.white {
-  width: 8rem;
+  width: clamp(4.5rem, 11vw, 8rem);
   height: 100%;
   background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
   border: 1px solid #ccc;
@@ -153,8 +160,8 @@ body {
 
 .key.black {
   position: absolute;
-  width: 5.4rem;
-  height: 13rem;
+  width: clamp(3rem, 7.5vw, 5.4rem);
+  height: 60%;
   background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
   border: 1px solid #111;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -171,7 +178,7 @@ body {
 }
 
 .key-label {
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
   font-weight: 500;
   opacity: 0.6;
 }
@@ -183,35 +190,40 @@ body {
 .key.black .key-label {
   color: #666;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: clamp(0.6rem, 1.2vw, 0.9rem);
 }
 
 /* Controls */
 .controls {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
   align-items: center;
   background: #16213e;
   border-radius: 1rem;
-  padding: 1.5rem 2rem;
+  padding: clamp(1rem, 1.5vw, 1.5rem) clamp(1.2rem, 2vw, 2rem);
 }
 
 .controls-row {
   display: flex;
-  gap: 1rem;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ctrl-btn {
-  padding: 0.8rem 1.6rem;
+  padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(1rem, 2vw, 1.6rem);
   border: none;
   border-radius: 0.8rem;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .ctrl-btn:disabled {
@@ -263,11 +275,11 @@ body {
 .octave-controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
 }
 
 .octave-label {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   color: #888;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -280,13 +292,13 @@ body {
 }
 
 .octave-btn {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: clamp(2.6rem, 5vw, 3.2rem);
+  height: clamp(2.6rem, 5vw, 3.2rem);
   border: 2px solid #555;
   border-radius: 50%;
   background: transparent;
   color: #e0e0e0;
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -306,7 +318,7 @@ body {
 }
 
 .octave-display {
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 3vw, 2rem);
   font-weight: 700;
   color: #4fc3f7;
   min-width: 2.5rem;
@@ -315,8 +327,51 @@ body {
 
 /* Keyboard hint */
 .keyboard-hint {
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
   color: #666;
   text-align: center;
   line-height: 1.6;
+  max-width: 100%;
+}
+
+/* Small screens */
+@media (max-width: 520px) {
+  .key.black .key-label {
+    display: none;
+  }
+
+  .status-bar {
+    gap: 0.5rem;
+  }
+
+  .status-item {
+    min-width: 5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-row {
+    justify-content: center;
+  }
+
+  .octave-controls {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .key.white {
+    width: clamp(3.2rem, 10vw, 4.5rem);
+  }
+
+  .key.black {
+    width: clamp(2rem, 6vw, 3rem);
+  }
+
+  .piano-keys {
+    height: clamp(11rem, 28vw, 14rem);
+  }
 }
