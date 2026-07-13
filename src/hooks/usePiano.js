@@ -125,20 +125,48 @@ export function usePiano() {
     if (isMouseDown.current) noteOn(noteIndex);
   }, [noteOn]);
 
+  const shiftOctave = useCallback((direction) => {
+    silenceAll();
+    isMouseDown.current = false;
+    setOctave((prev) => {
+      const next = prev + direction;
+      return next < OCTAVE.MIN || next > OCTAVE.MAX ? prev : next;
+    });
+  }, [silenceAll]);
+
+  const pressedNoteIndices = useRef(new Map());
+
   useEffect(() => {
     function onKeyDown(e) {
       if (e.repeat) return;
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        shiftOctave(e.key === "ArrowLeft" ? -1 : 1);
+        return;
+      }
       const index = KEYBOARD_MAP[e.key.toLowerCase()];
       if (index === undefined) return;
       e.preventDefault();
-      noteOn(index);
+      const offset = e.shiftKey ? 12 : 0;
+      const noteIdx = index + offset;
+      pressedNoteIndices.current.set(e.key.toLowerCase(), noteIdx);
+      noteOn(noteIdx);
     }
 
     function onKeyUp(e) {
-      const index = KEYBOARD_MAP[e.key.toLowerCase()];
-      if (index === undefined) return;
+      const key = e.key.toLowerCase();
+      const noteIdx = pressedNoteIndices.current.get(key);
+      if (noteIdx === undefined) return;
+      pressedNoteIndices.current.delete(key);
       e.preventDefault();
-      noteOff(index);
+      noteOff(noteIdx);
+    }
+
+    function onBlur() {
+      for (const noteIdx of pressedNoteIndices.current.values()) {
+        noteOff(noteIdx);
+      }
+      pressedNoteIndices.current.clear();
     }
 
     function onGlobalMouseUp() {
@@ -147,13 +175,15 @@ export function usePiano() {
 
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", onBlur);
     window.addEventListener("mouseup", onGlobalMouseUp);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", onBlur);
       window.removeEventListener("mouseup", onGlobalMouseUp);
     };
-  }, [noteOn, noteOff]);
+  }, [noteOn, noteOff, shiftOctave]);
 
   useEffect(() => {
     if (!isRecording) {
@@ -206,15 +236,6 @@ export function usePiano() {
     setIsRecording(false);
     setRecordingDuration(0);
   }, [handleStop]);
-
-  const shiftOctave = useCallback((direction) => {
-    silenceAll();
-    isMouseDown.current = false;
-    setOctave((prev) => {
-      const next = prev + direction;
-      return next < OCTAVE.MIN || next > OCTAVE.MAX ? prev : next;
-    });
-  }, [silenceAll]);
 
   useEffect(() => {
     return () => {

@@ -21,10 +21,17 @@ export const KEYBOARD_MAP = {
   u: 10, j: 11, k: 12,
 };
 
-export const WHITE_KEY_INDICES = [0, 2, 4, 5, 7, 9, 11, 12];
-export const BLACK_KEY_INDICES = [1, 3, 6, 8, 10];
+export const WHITE_KEY_INDICES = [
+  0, 2, 4, 5, 7, 9, 11,
+  12, 14, 16, 17, 19, 21, 23,
+];
 
-export const BLACK_KEY_POSITIONS = [0, 1, 3, 4, 5];
+export const BLACK_KEY_INDICES = [
+  1, 3, 6, 8, 10,
+  13, 15, 18, 20, 22,
+];
+
+export const BLACK_KEY_POSITIONS = [0, 1, 3, 4, 5, 7, 8, 10, 11, 12];
 
 export const OCTAVE = { MIN: 2, MAX: 7, DEFAULT: 4 };
 
