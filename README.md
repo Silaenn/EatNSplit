@@ -69,12 +69,8 @@ The project was built as a lightweight, zero-dependency music tool — no plugin
 ---
 
 ## Screenshots
+<img width="1920" height="964" alt="Interactive-Piano" src="https://github.com/user-attachments/assets/bee4cd23-313d-4080-95b3-392b13b0097e" />
 
-```
-[Screenshot 1] — Piano view with active notes and recording status bar
-[Screenshot 2] — Recording playback in progress
-[Screenshot 3] — Landscape orientation on mobile
-```
 
 ---
 
