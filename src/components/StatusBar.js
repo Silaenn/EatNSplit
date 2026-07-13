@@ -30,7 +30,21 @@ export default function StatusBar({
       <div className="status-item">
         <span className="status-label">Status</span>
         <span className={`status-value status-indicator ${isRecording ? "recording" : ""} ${isPlaying ? "playing" : ""}`}>
-          {isRecording && `Recording ${formatDuration(recordingDuration)}`}
+          {isRecording && (
+            <>
+              Recording {formatDuration(recordingDuration)}
+              <span className="waveform">
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+                <span className="waveform-bar" />
+              </span>
+            </>
+          )}
           {isPlaying && "Playing"}
           {!isRecording && !isPlaying && "Ready"}
         </span>

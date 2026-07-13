@@ -16,7 +16,10 @@ export default function App() {
     <>
       <RotateOverlay />
       <div className="app">
-      <h1 className="app-title">Interactive Piano</h1>
+      <div className="app-header">
+        <div className="app-logo">&#9835;</div>
+        <h1 className="app-title">Interactive Piano</h1>
+      </div>
 
       <StatusBar
         activeNotes={piano.activeNoteIds}

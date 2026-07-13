@@ -1,3 +1,5 @@
+import { Circle, Play, Square, Trash } from "@phosphor-icons/react";
+
 export default function Controls({
   isRecording,
   isPlaying,
@@ -17,6 +19,7 @@ export default function Controls({
           onClick={onRecord}
           disabled={isPlaying}
         >
+          <Circle weight="fill" />
           {isRecording ? "Stop Rec" : "Record"}
         </button>
 
@@ -25,6 +28,7 @@ export default function Controls({
           onClick={onPlay}
           disabled={isPlaying || recordedCount === 0 || isRecording}
         >
+          <Play weight="fill" />
           Play
         </button>
 
@@ -33,6 +37,7 @@ export default function Controls({
           onClick={onStop}
           disabled={!isPlaying || isRecording}
         >
+          <Square weight="fill" />
           Stop
         </button>
 
@@ -41,6 +46,7 @@ export default function Controls({
           onClick={onClear}
           disabled={(recordedCount === 0 && !isRecording) || isRecording}
         >
+          <Trash weight="regular" />
           Clear
         </button>
       </div>
@@ -53,7 +59,7 @@ export default function Controls({
             onClick={() => onOctaveChange(-1)}
             disabled={octave <= 2 || isPlaying}
           >
-            -
+            &minus;
           </button>
           <span className="octave-display">{octave}</span>
           <button
