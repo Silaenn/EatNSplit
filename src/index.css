@@ -45,36 +45,6 @@ body::before {
   padding: clamp(1.5rem, 3vw, 3rem);
 }
 
-.app-header {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  width: 100%;
-}
-
-.app-logo {
-  width: clamp(3rem, 5vw, 4.2rem);
-  height: clamp(3rem, 5vw, 4.2rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #fff;
-  font-family: "Righteous", sans-serif;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  flex-shrink: 0;
-}
-
-.app-title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-family: "Righteous", sans-serif;
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 /* Status Bar */
 .status-bar {
   width: 100%;
@@ -468,21 +438,6 @@ body::before {
   .app {
     gap: 0.5rem;
     padding: 0.5rem;
-  }
-
-  .app-header {
-    gap: 0.6rem;
-  }
-
-  .app-title {
-    font-size: 1.4rem;
-  }
-
-  .app-logo {
-    width: 2.4rem;
-    height: 2.4rem;
-    font-size: 1.2rem;
-    border-radius: 0.6rem;
   }
 
   .status-bar {
