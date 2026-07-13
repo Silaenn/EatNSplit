@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="public/logo.png" alt="Interactive Piano" width="80" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Interactive Piano</h1>
 
-## Available Scripts
+<p align="center">
+  A browser-based piano with recording, playback, and multi-touch support — built with React and the Web Audio API.
+  <br /><br />
+  <a href="#features"><img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React 19" /></a>
+  <a href="#features"><img src="https://img.shields.io/badge/Web_Audio_API-✓-22C55E" alt="Web Audio API" /></a>
+  <a href="#features"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a>
+  <a href="https://github.com/Silaenn/EatNSplit"><img src="https://img.shields.io/badge/status-active-success" alt="Active" /></a>
+</p>
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Deployment](#deployment)
+- [Author](#author)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## About
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Interactive Piano is a real-time polyphonic piano that runs entirely in the browser. It supports mouse, touch, and computer keyboard input, and includes a built-in recording system that captures both note-on and note-off events with precise timing for faithful playback of chords and articulation.
 
-### `npm run build`
+The project was built as a lightweight, zero-dependency music tool — no plugins, no downloads, just open and play.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Polyphonic engine** — Unlimited simultaneous notes via dedicated oscillator + gain envelope per key
+- **Multi-input** — Mouse click/drag, multi-touch (tracked per finger), and QWERTY keyboard mapping
+- **Recording & playback** — Captures note-on and note-off timing; plays back with original articulation and chord fidelity
+- **Octave shifting** — Shift the full keyboard up or down across 6 octaves
+- **Glassmorphism UI** — Dark emerald theme with noise texture, blurred surfaces, and responsive layout
+- **Landscape-aware** — Rotate-to-landscape prompt on narrow screens; optimized piano height in landscape
+- **Touch-optimized** — Per-finger tracking using `touch.identifier` for accurate multi-touch slides
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Layer | Technology |
+|-------|-----------|
+| **Framework** | [React 19](https://react.dev) |
+| **Audio** | [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) (OscillatorNode + GainNode) |
+| **Styling** | Pure CSS (glassmorphism, noise texture, custom animations) |
+| **Icons** | [Phosphor Icons](https://phosphoricons.com) |
+| **Typography** | Poppins + Righteous (Google Fonts) |
+| **Build** | Create React App 5 |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/CSS3-✓-1572B6?logo=css3" />
+  <img src="https://img.shields.io/badge/Web_Audio_API-✓-22C55E" />
+</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Screenshots
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+[Screenshot 1] — Piano view with active notes and recording status bar
+[Screenshot 2] — Recording playback in progress
+[Screenshot 3] — Landscape orientation on mobile
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Prerequisites
 
-### Analyzing the Bundle Size
+- Node.js >= 16
+- npm >= 8
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Installation
 
-### Making a Progressive Web App
+```bash
+git clone https://github.com/Silaenn/EatNSplit.git
+cd interactive-piano
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+No API keys, environment variables, or external services are required.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Usage
 
-### Deployment
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Opens at [http://localhost:3000](http://localhost:3000).
 
-### `npm run build` fails to minify
+### Controls
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Input | Action |
+|-------|--------|
+| **Mouse click** on a key | Play note |
+| **Drag** across keys | Glissando |
+| **A W S E D F T G Y H U J K** | White and black keys (see on-screen legend) |
+| **Shift** + key | +1 octave |
+| **← / →** | Shift octave down / up |
+| **Multi-touch** | Play chords with multiple fingers |
+
+### Recording
+
+1. Press **Record** — all played notes are captured with timing
+2. Press **Stop Rec** to end the recording
+3. Press **Play** to hear the recording with original timing and articulation
+4. **Clear** to delete the recorded take
+
+---
+
+## Project Structure
+
+```
+interactive-piano/
+├── public/
+│   ├── index.html          # HTML template + Google Fonts
+│   ├── logo.png            # App logo / favicon
+│   ├── manifest.json       # PWA manifest
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── Piano.js        # Keyboard UI + mouse/touch event wiring
+│   │   ├── Controls.js     # Record/Play/Stop/Clear + octave buttons
+│   │   ├── StatusBar.js    # Octave, active notes, recording status
+│   │   └── RotateOverlay.js# Landscape-orientation prompt
+│   ├── hooks/
+│   │   └── usePiano.js     # Central state, audio engine, recording/playback logic
+│   ├── constants/
+│   │   └── notes.js        # Note definitions, frequencies, keyboard map
+│   ├── App.js              # Root composition
+│   ├── index.js            # Entry point
+│   └── index.css           # All styles
+└── package.json
+```
+
+---
+
+## Deployment
+
+The app is a static React SPA and can be deployed to any static host.
+
+### Vercel
+
+```bash
+npx vercel --prod
+```
+
+### GitHub Pages
+
+```bash
+npm run build
+npx gh-pages -d build
+```
+
+The `build/` folder after `npm run build` contains the entire deployable application.
+
+---
+
+## Author
+
+Built by [Silaenn](https://github.com/Silaenn).
+
+Project Link: [https://github.com/Silaenn/EatNSplit](https://github.com/Silaenn/EatNSplit)
