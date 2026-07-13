@@ -166,8 +166,8 @@ body {
 
 .key.black.active {
   background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
-  transform: translateY(0.2rem);
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.5),
+    inset 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3);
 }
 
 .key-label {
