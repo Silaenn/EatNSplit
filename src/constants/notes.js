@@ -45,8 +45,11 @@ export function getNoteId(noteIndex, octave) {
   return `${name}${oct}`;
 }
 
-export function getFrequency(noteIndex) {
+export function getFrequency(noteIndex, baseOctave = OCTAVE.DEFAULT) {
   const note = NOTE_DATA[noteIndex % NOTES_PER_OCTAVE];
-  const octaveOffset = Math.floor(noteIndex / NOTES_PER_OCTAVE);
-  return note.freq * Math.pow(2, octaveOffset);
+  const indexOctaveOffset = Math.floor(noteIndex / NOTES_PER_OCTAVE);
+  const effectiveOctave = baseOctave + indexOctaveOffset;
+  const octavesFromDefault = effectiveOctave - OCTAVE.DEFAULT;
+  return note.freq * Math.pow(2, octavesFromDefault);
 }
+

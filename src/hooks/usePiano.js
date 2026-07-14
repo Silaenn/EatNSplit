@@ -57,7 +57,7 @@ export function usePiano() {
     const gain = audio.createGain();
     const now = audio.currentTime;
     const noteId = getNoteId(noteIndex, octaveRef.current);
-    const freq = getFrequency(noteIndex);
+    const freq = getFrequency(noteIndex, octaveRef.current);
 
     osc.type = "sine";
     osc.frequency.value = freq;
