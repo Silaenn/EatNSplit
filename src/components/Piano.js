@@ -1,7 +1,5 @@
 import { useRef } from "react";
-import { getNoteId } from "../constants/notes";
-
-const BLACK_KEY_POSITIONS = [0, 1, 3, 4, 5, 7, 8, 10, 11, 12];
+import { getNoteId, BLACK_KEY_POSITIONS } from "../constants/notes";
 
 export default function Piano({
   noteData,

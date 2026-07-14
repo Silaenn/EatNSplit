@@ -195,7 +195,6 @@ body::before {
     0 0.1rem 0.2rem rgba(0, 0, 0, 0.2),
     inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1),
     0 0 1.2rem rgba(34, 197, 94, 0.15);
-  transform: translateY(0.3rem) scaleY(0.98);
 }
 
 .key.black {

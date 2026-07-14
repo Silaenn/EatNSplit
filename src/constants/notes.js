@@ -23,7 +23,7 @@ export const KEYBOARD_MAP = {
 
 export const WHITE_KEY_INDICES = [
   0, 2, 4, 5, 7, 9, 11,
-  12, 14, 16, 17, 19, 21, 23,
+  12, 14, 16, 17, 19, 21, 23, 24
 ];
 
 export const BLACK_KEY_INDICES = [
