@@ -85,7 +85,7 @@ The project was built as a lightweight, zero-dependency music tool — no plugin
 
 ```bash
 git clone https://github.com/Silaenn/EatNSplit.git
-cd interactive-piano
+cd EatNSplit
 npm install
 ```
 
