@@ -70,7 +70,7 @@ body::before {
 }
 
 .status-label {
-  color: #64748b;
+  color: #94a3b8;
   font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -348,7 +348,7 @@ body::before {
 
 .octave-label {
   font-size: clamp(0.8rem, 1.2vw, 0.95rem);
-  color: #64748b;
+  color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 500;
@@ -398,7 +398,7 @@ body::before {
 /* Keyboard hint */
 .keyboard-hint {
   font-size: clamp(0.8rem, 1.5vw, 1.1rem);
-  color: #475569;
+  color: #7c8ca2;
   text-align: center;
   line-height: 1.6;
   max-width: 100%;
@@ -568,7 +568,7 @@ body::before {
 
 .rotate-sub {
   font-size: 1.3rem;
-  color: #64748b;
+  color: #94a3b8;
   text-align: center;
 }
 
