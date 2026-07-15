@@ -59,7 +59,7 @@ export function usePiano() {
     const noteId = getNoteId(noteIndex, octaveRef.current);
     const freq = getFrequency(noteIndex, octaveRef.current);
 
-    osc.type = "sine";
+    osc.type = "triangle";
     osc.frequency.value = freq;
 
     gain.gain.setValueAtTime(0, now);
