@@ -22,12 +22,19 @@ export default function Piano({
     return el ? Number(el.dataset.noteIndex) : null;
   }
 
+  function toggleKeyActive(idx, active) {
+    const el = document.querySelector(`[data-note-index="${idx}"]`);
+    if (el) el.classList.toggle("active", active);
+  }
+
   function handleTouchStart(e) {
     e.preventDefault();
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
-      const idx = getKeyIndex(touch.target);
+      const el = touch.target.closest("[data-note-index]");
+      const idx = el ? Number(el.dataset.noteIndex) : null;
       if (idx === null) continue;
+      toggleKeyActive(idx, true);
       touchToNoteMap.current.set(touch.identifier, idx);
       onNoteStart(idx);
     }
@@ -45,8 +52,10 @@ export default function Piano({
       if (prevIdx === idx) continue;
 
       if (prevIdx !== undefined) {
+        toggleKeyActive(prevIdx, false);
         onNoteEnd(prevIdx);
       }
+      toggleKeyActive(idx, true);
       touchToNoteMap.current.set(touch.identifier, idx);
       onNoteStart(idx);
     }
@@ -59,12 +68,14 @@ export default function Piano({
       const idx = touchToNoteMap.current.get(touch.identifier);
       if (idx === undefined) continue;
       touchToNoteMap.current.delete(touch.identifier);
+      toggleKeyActive(idx, false);
       onNoteEnd(idx);
     }
   }
 
   function handleTouchCancel() {
     for (const [, idx] of touchToNoteMap.current) {
+      toggleKeyActive(idx, false);
       onNoteEnd(idx);
     }
     touchToNoteMap.current.clear();

@@ -171,7 +171,7 @@ body::before {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-  transition: background 0.08s ease, box-shadow 0.08s ease, transform 0.08s ease;
+  transition: transform 0.05s ease;
 }
 
 .key.white {

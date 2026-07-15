@@ -33,6 +33,7 @@ export function usePiano() {
   const playbackTimers = useRef([]);
   const isMouseDown = useRef(false);
   const durationTimer = useRef(null);
+  const rafId = useRef(null);
 
   useEffect(() => { octaveRef.current = octave; }, [octave]);
   useEffect(() => { isRecordingRef.current = isRecording; }, [isRecording]);
@@ -45,6 +46,21 @@ export function usePiano() {
     }
     return ctx.current;
   }
+
+  const syncActiveIds = useCallback(() => {
+    rafId.current = null;
+    const ids = new Set();
+    for (const { noteId } of oscillators.current.values()) {
+      ids.add(noteId);
+    }
+    setActiveNoteIds(ids);
+  }, []);
+
+  const scheduleSync = useCallback(() => {
+    if (!rafId.current) {
+      rafId.current = requestAnimationFrame(syncActiveIds);
+    }
+  }, [syncActiveIds]);
 
   const noteOn = useCallback((noteIndex, force = false) => {
     if (!force && isPlayingRef.current) return;
@@ -69,7 +85,7 @@ export function usePiano() {
     osc.start();
 
     oscillators.current.set(noteIndex, { osc, gain, noteId });
-    setActiveNoteIds((prev) => new Set(prev).add(noteId));
+    scheduleSync();
 
     if (isRecordingRef.current) {
       setRecordedNotes((prev) => [
@@ -77,13 +93,13 @@ export function usePiano() {
         { type: "on", noteIndex, time: Date.now() - recordingStartedAt.current },
       ]);
     }
-  }, []);
+  }, [scheduleSync]);
 
   const noteOff = useCallback((noteIndex) => {
     const entry = oscillators.current.get(noteIndex);
     if (!entry) return;
 
-    const { osc, gain, noteId } = entry;
+    const { osc, gain } = entry;
     const audio = ctx.current;
 
     if (audio && audio.state !== "closed") {
@@ -97,12 +113,7 @@ export function usePiano() {
 
     setTimeout(() => { try { osc.stop(); } catch {} }, 150);
     oscillators.current.delete(noteIndex);
-
-    setActiveNoteIds((prev) => {
-      const next = new Set(prev);
-      next.delete(noteId);
-      return next;
-    });
+    scheduleSync();
 
     if (isRecordingRef.current) {
       setRecordedNotes((prev) => [
@@ -110,7 +121,7 @@ export function usePiano() {
         { type: "off", noteIndex, time: Date.now() - recordingStartedAt.current },
       ]);
     }
-  }, []);
+  }, [scheduleSync]);
 
   const silenceAll = useCallback(() => {
     for (const [index] of oscillators.current) {
@@ -253,7 +264,9 @@ export function usePiano() {
 
   useEffect(() => {
     return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
       silenceAll();
+      setActiveNoteIds(new Set());
       playbackTimers.current.forEach(clearTimeout);
       ctx.current?.close();
     };
