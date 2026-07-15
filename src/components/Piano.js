@@ -63,6 +63,13 @@ export default function Piano({
     }
   }
 
+  function handleTouchCancel() {
+    for (const [, idx] of touchToNoteMap.current) {
+      onNoteEnd(idx);
+    }
+    touchToNoteMap.current.clear();
+  }
+
   return (
     <div className="piano-wrapper">
       <div className="piano">
@@ -70,6 +77,7 @@ export default function Piano({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
         >
           {whiteKeyIndices.map((idx) => {
             const note = noteData[idx % 12];

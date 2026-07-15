@@ -192,6 +192,14 @@ export function usePiano() {
   }, [noteOn, noteOff, shiftOctave]);
 
   useEffect(() => {
+    function onVisibilityChange() {
+      if (document.hidden) silenceAll();
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, [silenceAll]);
+
+  useEffect(() => {
     if (!isRecording) {
       setRecordingDuration(0);
       return;
